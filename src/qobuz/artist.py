@@ -1,5 +1,13 @@
 import qobuz
 
+class Picture:
+    def __init__(self, picture_dict=None):
+        picture_dict = picture_dict or {}
+        self.small = picture_dict.get('small')
+        self.medium = picture_dict.get('medium')
+        self.large = picture_dict.get('large')
+        self.extralarge = picture_dict.get('extralarge')
+        self.mega = picture_dict.get('mega')
 
 class Artist(object):
     """This class represents an artist from the Qobuz-API.
@@ -18,7 +26,7 @@ class Artist(object):
     def __init__(self, artist_item):
         self.id = artist_item.get("id")
         self.name = artist_item.get("name")
-        self.picture = artist_item.get("picture")
+        self.picture = Picture(artist_item.get("image", {}))
         self.slug = artist_item.get("slug")
         self.albums_count = artist_item.get("albums_count")
         self.biography = artist_item.get("biography", {}).get("summary")
